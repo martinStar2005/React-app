@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Contacts from "./Contacts";
 import inputs from "../constants/inpus.js";
+import {v4} from "uuid"
 
 export default function Form() {
   const [alert, setAlert] = useState("");
@@ -24,7 +25,8 @@ export default function Form() {
       return;
     }
     setAlert("");
-    setContacts((contact) => [...contact, form]);
+    const newForm = {...form, id: v4()}
+    setContacts((contact) => [...contact, newForm]);
     setForm({ fName: "", lName: "", email: "", telephonNumber: "" });
   };
 
