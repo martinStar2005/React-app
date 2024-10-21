@@ -1,6 +1,10 @@
 import { useState } from "react";
+import Contacts from "./Contacts";
 
 export default function Form() {
+  
+
+  const [alert, setAlert] = useState("");
   const [contacts, setContacts] = useState([]);
   const [form, setForm] = useState({
     fName: "",
@@ -17,6 +21,11 @@ export default function Form() {
   };
 
   const submit = () => {
+    if (!form.fName || !form.lName || !form.email || !form.telephonNumber) {
+      setAlert("Please inter a valid input");
+      return;
+    }
+    setAlert("");
     setContacts((contact) => [...contact, form]);
     setForm({ fName: "", lName: "", email: "", telephonNumber: "" });
   };
@@ -48,6 +57,8 @@ export default function Form() {
         onChange={setTheFormInput}
       />
       <button onClick={submit}>Save</button>
+      <div>{alert && <p>{alert}</p>}</div>
+      <Contacts contacts={contacts} />
     </div>
   );
 }
