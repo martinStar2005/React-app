@@ -1,9 +1,8 @@
 import { useState } from "react";
 import Contacts from "./Contacts";
+import inputs from "../constants/inpus.js";
 
 export default function Form() {
-  
-
   const [alert, setAlert] = useState("");
   const [contacts, setContacts] = useState([]);
   const [form, setForm] = useState({
@@ -16,7 +15,6 @@ export default function Form() {
   const setTheFormInput = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-
     setForm((form) => ({ ...form, [name]: value }));
   };
 
@@ -32,30 +30,19 @@ export default function Form() {
 
   return (
     <div>
-      <input
-        type="text"
-        name="fName"
-        value={form.fName}
-        onChange={setTheFormInput}
-      />
-      <input
-        type="text"
-        name="lName"
-        value={form.lName}
-        onChange={setTheFormInput}
-      />
-      <input
-        type="email"
-        name="email"
-        value={form.email}
-        onChange={setTheFormInput}
-      />
-      <input
-        type="text"
-        name="telephonNumber"
-        value={form.telephonNumber}
-        onChange={setTheFormInput}
-      />
+      <div>
+        {inputs.map((input, index) => (
+          <input
+            key={index}
+            type={input.type}
+            name={input.name}
+            placeholder={input.placeholder}
+            value={form[input.name]}
+            onChange={setTheFormInput}
+          />
+        ))}
+      </div>
+
       <button onClick={submit}>Save</button>
       <div>{alert && <p>{alert}</p>}</div>
       <Contacts contacts={contacts} />
