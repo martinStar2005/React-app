@@ -1,9 +1,17 @@
-function Contacts({contacts}) {
+import ContactItem from "./ContactItem.jsx";
+
+function Contacts({ contacts }) {
   console.log(contacts);
   return (
     <div>
       <ul>
-        {contacts.map((contact) => (<li key={contact.id}>{contact.fName}</li>))}
+        {contacts.length ? (
+          contacts.map((contact) => (
+            <ContactItem key={contact.id} contact={contact} />
+          ))
+        ) : (
+          <p>No contact in list</p>
+        )}
       </ul>
     </div>
   );
