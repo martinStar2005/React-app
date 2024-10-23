@@ -1,12 +1,22 @@
+import styles from "./ContactItem.module.css";
+
 function ContactItem({ contact, deleteContact }) {
   return (
-    <li key={contact.id}>
-      <p>
+    <li className={styles.container} key={contact.id}>
+      <p className={styles.fullname}>
         {contact.fName} {contact.lName}
       </p>
-      <p>📧 {contact.email}</p>
-      <p>📞 {contact.telephonNumber}</p>
-      <button onClick={() => deleteContact(contact.id)}>🗑️</button>
+      <p className={styles.email}>
+        <span>📧</span> {contact.email}
+      </p>
+      <p className={styles.phone}>
+        <span>📞</span> {contact.telephonNumber}
+      </p>
+      <button
+        className={styles.remove}
+        onClick={() => deleteContact(contact.id)}
+      >🗑️
+      </button>
     </li>
   );
 }
