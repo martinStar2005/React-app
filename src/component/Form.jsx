@@ -19,6 +19,11 @@ export default function Form() {
     setForm((form) => ({ ...form, [name]: value }));
   };
 
+  const deleteContact = id => {
+    const newContacts = contacts.filter(contact => contact.id !== id)
+    setContacts(newContacts)
+  }
+
   const submit = () => {
     if (!form.fName || !form.lName || !form.email || !form.telephonNumber) {
       setAlert("Please inter a valid input");
@@ -47,7 +52,7 @@ export default function Form() {
 
       <button onClick={submit}>Save</button>
       <div>{alert && <p>{alert}</p>}</div>
-      <Contacts contacts={contacts} />
+      <Contacts contacts={contacts} deleteContact={deleteContact}/>
     </div>
   );
 }
